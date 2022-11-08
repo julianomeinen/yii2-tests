@@ -51,6 +51,7 @@ jobs:
 
       - name: Get composer cache directory
         id: composer-cache
+        working-directory: ./project/src/
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache composer dependencies
@@ -63,9 +64,11 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
+        working-directory: ./project/src/
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Prepare the application
+        working-directory: ./project/src/
         run: |
           php -r "file_exists('.env') || copy('.env.dist', '.env');"
         env:
@@ -73,6 +76,7 @@ jobs:
           TEST_DB_DSN: pgsql:host=127.0.0.1;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
 
       - name: Run Tests
+        working-directory: ./project/src/
         run: |
           vendor/bin/codecept build
           php tests/bin/yii app/setup --interactive=0
