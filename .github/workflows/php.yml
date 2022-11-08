@@ -68,7 +68,6 @@ jobs:
       - name: Prepare the application
         run: |
           php -r "file_exists('.env') || copy('.env.dist', '.env');"
-          php console/yii app/setup
           npm install --development
           npm run build
         env:
