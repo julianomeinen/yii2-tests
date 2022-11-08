@@ -34,7 +34,7 @@ jobs:
       - name: Set Node.js 10.x
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: 16.x
 
       # Docs: https://github.com/shivammathur/setup-php
       - name: Setup PHP
