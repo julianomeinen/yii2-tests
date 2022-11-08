@@ -31,7 +31,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set Node.js 10.x
+      - name: Set Node.js 16.x
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
@@ -85,7 +85,7 @@ jobs:
       #- name: Send coverage report to Coveralls for Active LTS version
       #  uses: coverallsapp/github-action@master
       #  with:
-      #    github-token: 9HvT2rypm5otmE4SZNL9gaO2LuN3heArq
+      #    github-token: ${{ secrets.GITHUB_TOKEN }}
 
   all_tests:
     name: Tests For All Versions Successful

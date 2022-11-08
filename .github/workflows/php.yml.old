@@ -48,7 +48,7 @@ jobs:
     #- name: Send coverage report to Coveralls for Active LTS version
     #  uses: coverallsapp/github-action@master
     #  with:
-    #    github-token: 9HvT2rypm5otmE4SZNL9gaO2LuN3heArq
+    #    github-token: ${{ secrets.GITHUB_TOKEN }}
 
   all_tests:
     name: Tests For All Versions Successful
