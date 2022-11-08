@@ -43,6 +43,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, intl, gd, imagick, zip, dom, pgsql
           coverage: xdebug
+          tools: cs2pr, phpcs
 
       # Local PostgreSQL service in GitHub hosted environments is disabled by default.
       # If you are using it instead of service containers, make sure you start it.
@@ -85,6 +86,10 @@ jobs:
         env:
           DB_DSN: pgsql:host=127.0.0.1;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
           TEST_DB_DSN: pgsql:host=127.0.0.1;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
+      
+      - name: Run phpcs
+        working-directory: ./project/src/
+        run: phpcs -q --report=checkstyle src | cs2pr
       
       #- name: Send coverage report to Coveralls for Active LTS version
       #  uses: coverallsapp/github-action@master
