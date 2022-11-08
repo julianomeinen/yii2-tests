@@ -37,6 +37,11 @@ jobs:
 
     # - name: Run test suite
     #   run: composer run-script test
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.1
+        coverage: true
+    
     - name: Run tests
       run: php vendor/bin/codecept run
 
