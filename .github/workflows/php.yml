@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -37,3 +37,18 @@ jobs:
 
     # - name: Run test suite
     #   run: composer run-script test
+    - name: Run tests
+      run: php vendor/bin/codecept run
+
+    - name: Send coverage report to Coveralls for Active LTS version
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: 9HvT2rypm5otmE4SZNL9gaO2LuN3heArq
+
+  all_tests:
+    name: Tests For All Versions Successful
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Return Status
+        run: true
