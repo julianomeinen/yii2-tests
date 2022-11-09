@@ -89,7 +89,7 @@ jobs:
       
       - name: Run phpcs
         working-directory: ./project/src/
-        run: phpcs -q --report=checkstyle ./controllers/ | cs2pr
+        run: phpcs --standard=PSR12 -q --report=checkstyle ./controllers/ | cs2pr
       
       #- name: Send coverage report to Coveralls for Active LTS version
       #  uses: coverallsapp/github-action@master
