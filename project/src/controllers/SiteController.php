@@ -13,7 +13,7 @@ use app\models\ContactForm;
 class SiteController extends Controller
 {
     /**
-     * Define behaviors
+     * Define behaviors used by the controller
      * {@inheritdoc}
      *
      * @return void
