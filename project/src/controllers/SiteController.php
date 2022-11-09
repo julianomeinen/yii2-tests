@@ -13,7 +13,10 @@ use app\models\ContactForm;
 class SiteController extends Controller
 {
     /**
+     * Define behaviors
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function behaviors()
     {
@@ -81,9 +84,12 @@ class SiteController extends Controller
         }
 
         $model->password = '';
-        return $this->render('login', [
+        return $this->render(
+            'login',
+            [
             'model' => $model,
-        ]);
+            ]
+        );
     }
 
     /**
@@ -111,9 +117,12 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
-        return $this->render('contact', [
+        return $this->render(
+            'contact',
+            [
             'model' => $model,
-        ]);
+            ]
+        );
     }
 
     /**
