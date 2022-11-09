@@ -82,7 +82,7 @@ jobs:
           vendor/bin/codecept build
           php tests/bin/yii app/setup --interactive=0
           nohup php -S localhost:8080 > yii.log 2>&1 &
-          vendor/bin/codecept run
+          vendor/bin/codecept run --coverage-xml
         env:
           DB_DSN: pgsql:host=127.0.0.1;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
           TEST_DB_DSN: pgsql:host=127.0.0.1;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
@@ -90,6 +90,14 @@ jobs:
       - name: Run phpcs
         working-directory: ./project/src/
         run: phpcs --standard=PSR12 -q --report=checkstyle ./controllers/ | cs2pr
+        
+      - name: Upload coverage results to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          vendor/bin/php-coveralls
+        # php-coveralls --coverage_clover=build/logs/clover.xml -v
       
       #- name: Send coverage report to Coveralls for Active LTS version
       #  uses: coverallsapp/github-action@master
