@@ -37,9 +37,7 @@ jobs:
 
       # queries database with postgres client
       - name: Create PosgreSQL uuid extension
-        run: | 
-         psql -h postgres -d postgres -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
-         psql -h postgres -U postgres_user -c 'CREATE DATABASE "dev_morcado";'
+        run: psql -h postgres -d postgres -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
         env:
           PGPASSWORD: postgres
           
