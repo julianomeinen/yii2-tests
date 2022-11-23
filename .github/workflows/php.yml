@@ -98,26 +98,17 @@ jobs:
           vendor/bin/codecept run --coverage-xml
           vendor/bin/php-coveralls -v
         env:
-          DB_DSN: pgsql:host=127.0.0.1;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
-          TEST_DB_DSN: pgsql:host=127.0.0.1;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          TEST_DB_USERNAME: postgres
+          TEST_DB_PASSWORD: postgres
+          DB_DSN: pgsql:host=postgres;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
+          TEST_DB_DSN: pgsql:host=postgres;port=${{ job.services.postgres.ports['5432'] }};dbname=postgres
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Run phpcs
         working-directory: ./project/src/
         run: phpcs --standard=PSR12 -q --report=checkstyle ./controllers/ | cs2pr
-        
-      #- name: Upload coverage results to Coveralls
-      #  env:
-      #    COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  run: |
-      #    composer global require php-coveralls/php-coveralls
-      #    vendor/bin/php-coveralls
-      #    php-coveralls --coverage_clover=build/logs/clover.xml -v
-      
-      #- name: Send coverage report to Coveralls for Active LTS version
-      #  uses: coverallsapp/github-action@master
-      #  with:
-      #    github-token: ${{ secrets.GITHUB_TOKEN }}
 
   all_tests:
     name: Tests For All Versions Successful
