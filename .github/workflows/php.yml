@@ -5,6 +5,8 @@ jobs:
   yii:
     name: Yii2 (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
+    # Docker Hub image that `postgres-job` executes in
+    container: node:latest
     env:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
