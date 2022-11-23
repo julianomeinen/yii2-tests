@@ -28,6 +28,17 @@ jobs:
       matrix:
         php-versions: ['8.1']
     steps:
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
+
+      # queries database with postgres client
+      - name: Create PosgreSQL uuid extension
+        run: psql -h postgres -d postgres -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+        env:
+          PGPASSWORD: postgres
+          
       - name: Checkout
         uses: actions/checkout@v3
 
