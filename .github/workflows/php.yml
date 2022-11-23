@@ -37,7 +37,9 @@ jobs:
 
       # queries database with postgres client
       - name: Create PosgreSQL uuid extension
-        run: psql -h postgres -d postgres -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+        run: | 
+         psql -h postgres -d postgres -U postgres -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+         psql -h postgres -U postgres_user -c 'CREATE DATABASE "dev_morcado";'
         env:
           PGPASSWORD: postgres
           
@@ -92,6 +94,7 @@ jobs:
       - name: Run Tests
         working-directory: ./project/src/
         run: |
+          ./yii migrate --interactive=0
           vendor/bin/codecept build
           nohup php -S localhost:8080 > yii.log 2>&1 &
           vendor/bin/codecept run --coverage-xml
