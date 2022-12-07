@@ -48,7 +48,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.5
         with:
             ssh-private-key: ${{ secrets.MY_PRIVATE_DEPLOY_KEY }}
-        run: docker compose build --ssh default
 
       - name: Set Node.js 16.x
         uses: actions/setup-node@v1
