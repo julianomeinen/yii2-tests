@@ -43,11 +43,13 @@ jobs:
           
       - name: Checkout
         uses: actions/checkout@v3
-        
-      - name: Setup SSH key
-        uses: ./
+             
+      - name: Install dependencies
+        uses: php-actions/composer@master
         with:
-            ssh-private-key: ${{ secrets.MY_PRIVATE_DEPLOY_KEY }}     
+          php_version: '8.1'
+          ssh_key: ${{ secrets.SSH_KEY }}
+          ssh_key_pub: ${{ secrets.SSH_KEY_PUB }}
 
       - name: Set Node.js 16.x
         uses: actions/setup-node@v1
