@@ -47,10 +47,8 @@ jobs:
       - name: Setup SSH Keys
         uses: webfactory/ssh-agent@v0.7.0
         with:
-          ssh-private-key: ${{ SSH_KEY_SECRET }}
-        env:
-          SSH_KEY_SECRET: ${{ secrets.SSH_PRIVATE_KEY }}
-        
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+                
       - name: Set Node.js 16.x
         uses: actions/setup-node@v1
         with:
