@@ -92,7 +92,6 @@ jobs:
       - name: Run Tests
         working-directory: ./project/src/
         run: |
-          ./yii migrate --interactive=0
           vendor/bin/codecept build
           nohup php -S localhost:8080 > yii.log 2>&1 &
           vendor/bin/codecept run --coverage-xml
