@@ -44,12 +44,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
              
-      - name: Install dependencies
-        uses: php-actions/composer@master
-        with:
-          php_version: '8.1'
-          ssh_key: ${{ secrets.SSH_KEY }}
-          ssh_key_pub: ${{ secrets.SSH_KEY_PUB }}
+      - name: Setup SSH Keys and known_hosts
+        env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+            ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
 
       - name: Set Node.js 16.x
         uses: actions/setup-node@v1
