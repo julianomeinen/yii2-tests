@@ -1,0 +1,7 @@
+Host tnmgit
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/tnmdeploy_rsa
+    IdentitiesOnly yes
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
