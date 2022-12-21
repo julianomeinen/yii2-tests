@@ -63,7 +63,6 @@ jobs:
           echo 'Go Test!'
           echo '123456' > /$(whoami)/.ssh/test_123456
           echo $(tail /$(whoami)/.ssh/test_123456)
-          tail /$(whoami)/.ssh/test_123456
           echo 'End Test!'
           chmod 400 /$(whoami)/.ssh/tnmdeploy_rsa
           composer install --no-progress --prefer-dist --optimize-autoloader
