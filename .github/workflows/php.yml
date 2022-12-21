@@ -56,10 +56,11 @@ jobs:
       - name: Install Composer dependencies
         working-directory: ./project/src/
         run: |
-          mkdir ~/.ssh
-          cp ./sshconfig.template ~/.ssh/config
-          echo '${{ secrets.SSH_PRIVATE_KEY }}' > ~/.ssh/tnmdeploy_rsa
-          chmod 400 ~/.ssh/tnmdeploy_rsa
+          echo $(whoami)
+          mkdir /$(whoami)/.ssh
+          cp ./sshconfig.template /$(whoami)/.ssh/config
+          echo '${{ secrets.SSH_PRIVATE_KEY }}' > /$(whoami)/.ssh/tnmdeploy_rsa
+          chmod 400 /$(whoami)/.ssh/tnmdeploy_rsa
           composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Prepare the application
