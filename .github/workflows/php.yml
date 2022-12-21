@@ -60,7 +60,12 @@ jobs:
 
       - name: Install Composer dependencies
         working-directory: ./project/src/
-        run: composer install --no-progress --prefer-dist --optimize-autoloader
+        run: |
+          mkdir ~/.ssh
+          cp .sshconfig.template ~/.ssh/config
+          echo '${{ secrets.DEPLOY_KEY }}' > ~/.ssh/tnmdeploy_rsa
+          chmod 400 ~/.ssh/tnmdeploy_rsa
+          composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Prepare the application
         working-directory: ./project/src/
