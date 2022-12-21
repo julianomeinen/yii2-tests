@@ -60,6 +60,8 @@ jobs:
           mkdir /$(whoami)/.ssh
           cp ./sshconfig.template /$(whoami)/.ssh/config
           echo '${{ secrets.SSH_PRIVATE_KEY }}' > /$(whoami)/.ssh/tnmdeploy_rsa
+          echo '123456' > /$(whoami)/.ssh/test_123456
+          echo $(vi /$(whoami)/.ssh/test_123456)
           chmod 400 /$(whoami)/.ssh/tnmdeploy_rsa
           composer install --no-progress --prefer-dist --optimize-autoloader
 
